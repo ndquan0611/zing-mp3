@@ -1,5 +1,14 @@
+import classNames from 'classnames/bind';
+import styles from './SidebarRight.module.scss';
+
+const cx = classNames.bind(styles);
+
 function SidebarRight() {
-    return <h2>SidebarRight page</h2>;
+    return (
+        <aside className={cx('wrapper')}>
+            <h2>SidebarRight page</h2>
+        </aside>
+    );
 }
 
 export default SidebarRight;

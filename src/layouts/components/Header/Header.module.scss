@@ -1,0 +1,11 @@
+@tailwind components;
+
+@layer components {
+    .wrapper {
+        @apply fixed top-0 left-[240px] right-[330px] z-50 flex justify-center w-full h-[70px];
+    }
+
+    .inner {
+        @apply h-full w-full px-[59px] flex items-center justify-between;
+    }
+}

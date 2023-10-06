@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+    .wrapper {
+        @apply max-w-[240px] w-full;
+    }
+}
