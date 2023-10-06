@@ -2,6 +2,14 @@
 
 @layer components {
     .wrapper {
-        @apply max-w-[240px] w-full;
+        @apply relative max-w-[240px] w-full h-[calc(100vh-90px)] z-50 pt-[70px] pb-[54px] bg-[#ffffff0d];
+    }
+
+    .brand {
+        @apply absolute top-0 left-0 right-0 h-[70px] flex items-center pl-7 pr-[25px];
+    }
+
+    .logo {
+        @apply h-[45px];
     }
 }

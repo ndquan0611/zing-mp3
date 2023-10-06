@@ -1,0 +1,29 @@
+@tailwind components;
+
+@layer components {
+    .menu-item {
+        @apply flex items-center px-[21px] py-[12px] text-sm font-medium text-[#dadada] border-solid border-l-[3px] border-transparent;
+
+        &:hover {
+            .right-icon {
+                @apply flex;
+            }
+        }
+
+        &.active {
+            @apply border-[#9b4de0] text-white bg-[#ffffff1a];
+        }
+    }
+
+    .left-icon {
+        @apply mr-3;
+    }
+
+    .right-icon {
+        @apply ml-auto hidden;
+    }
+
+    .title {
+        @apply leading-normal;
+    }
+}
