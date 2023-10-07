@@ -1,0 +1,32 @@
+@tailwind components;
+
+@layer components {
+    .search-result,
+    .wrapper {
+        @apply w-[440px];
+    }
+
+    .wrapper {
+        @apply relative h-10 flex bg-borderPrimary rounded-[20px];
+
+        input {
+            @apply flex-1 h-10 pr-10 bg-transparent text-sm text-[#eee] font-inter;
+
+            &::placeholder {
+                @apply text-[#d5d4d6];
+            }
+        }
+    }
+
+    .search-title {
+        @apply text-sm font-bold px-[10px] pb-2 flex justify-between;
+    }
+
+    .search-btn {
+        @apply flex items-center justify-center w-10 h-full text-[#eee] hover:brightness-90;
+    }
+
+    .clear {
+        @apply absolute flex top-1/2 right-[15px] text-[#eee] -translate-y-1/2;
+    }
+}

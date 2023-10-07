@@ -13,9 +13,18 @@
         }
     }
 
+    .icon + .title,
+    .title + .icon {
+        @apply ml-1;
+    }
+
+    .icon {
+        @apply inline-block text-center;
+    }
+
     // Button types
     .curved {
-        @apply rounded-full border-[#ffffff1a];
+        @apply rounded-full border-borderPrimary;
     }
 
     .primary {
@@ -23,7 +32,7 @@
     }
 
     .outlined {
-        @apply text-darkPrimary border-current;
+        @apply text-primary border-current;
     }
 
     .text {

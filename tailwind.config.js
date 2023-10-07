@@ -13,6 +13,7 @@ module.exports = {
                 darkPrimary: '#9b4de0',
                 textColor: '#dadada',
                 borderPrimary: '#ffffff1a',
+                bgPrimary: '#34224f',
             },
         },
     },

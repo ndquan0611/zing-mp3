@@ -8,4 +8,15 @@
     body {
         @apply font-inter text-white bg-[#170f23];
     }
+
+    button,
+    input,
+    [tabindex] {
+        outline: none;
+        border: none;
+    }
+
+    a {
+        @apply text-textColor no-underline;
+    }
 }
