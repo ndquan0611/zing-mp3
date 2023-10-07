@@ -8,6 +8,12 @@ module.exports = {
                 inter: ['Inter', 'sans-serif'],
                 roboto: ['Roboto', 'sans-serif'],
             },
+            colors: {
+                primary: '#c273ed',
+                darkPrimary: '#9b4de0',
+                textColor: '#dadada',
+                borderPrimary: '#ffffff1a',
+            },
         },
     },
     plugins: [],

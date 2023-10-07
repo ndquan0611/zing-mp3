@@ -1,0 +1,43 @@
+@tailwind components;
+
+@layer components {
+    .wrapper {
+        @apply inline-flex items-center justify-center px-6 py-[10px] rounded text-sm font-semibold font-inter cursor-pointer bg-transparent border-solid border-[1px] border-transparent select-none;
+
+        + .wrapper {
+            @apply ml-2;
+        }
+
+        &.disabled {
+            @apply pointer-events-none opacity-50;
+        }
+    }
+
+    // Button types
+    .curved {
+        @apply rounded-full border-[#ffffff1a];
+    }
+
+    .primary {
+        @apply text-white bg-darkPrimary border-darkPrimary;
+    }
+
+    .outlined {
+        @apply text-darkPrimary border-current;
+    }
+
+    .text {
+        &:hover {
+            @apply underline;
+        }
+    }
+
+    // Button sizes
+    .small {
+        @apply px-6 py-[9px];
+    }
+
+    .large {
+        @apply px-10 py-4;
+    }
+}

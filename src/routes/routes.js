@@ -1,8 +1,11 @@
 import config from '~/config';
 import Home from '~/pages/Home';
-import MyMusic from '~/pages/MyMusic';
-import Radio from '~/pages/Radio';
 import ZingChart from '~/pages/ZingChart';
+import Radio from '~/pages/Radio';
+import MyMusic from '~/pages/MyMusic';
+import Rating from '~/pages/Rating';
+import Hub from '~/pages/Hub';
+import Top100 from '~/pages/Top100';
 
 const publicRoutes = [
     {
@@ -20,6 +23,18 @@ const publicRoutes = [
     {
         path: config.routes.mymusic,
         component: MyMusic,
+    },
+    {
+        path: config.routes.rating,
+        component: Rating,
+    },
+    {
+        path: config.routes.hub,
+        component: Hub,
+    },
+    {
+        path: config.routes.top100,
+        component: Top100,
     },
 ];
 

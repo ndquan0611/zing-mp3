@@ -12,4 +12,21 @@
     .logo {
         @apply h-[45px];
     }
+
+    .separate {
+        @apply relative h-[1px];
+
+        &::after {
+            content: '';
+            @apply absolute top-0 left-[25px] right-[25px] border-t-[1px] border-solid border-borderPrimary z-10;
+        }
+    }
+
+    .login {
+        @apply px-2 py-[15px] mx-5 my-[15px] text-center bg-darkPrimary rounded-lg;
+    }
+
+    .login-btn {
+        @apply px-[35px] py-[6px] text-xs border-white bg-borderPrimary uppercase hover:brightness-90;
+    }
 }

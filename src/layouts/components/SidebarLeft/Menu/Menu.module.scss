@@ -1,8 +1,12 @@
 @tailwind components;
 
 @layer components {
+    .wrapper {
+        @apply mb-4;
+    }
+
     .menu-item {
-        @apply flex items-center px-[21px] py-[12px] text-sm font-medium text-[#dadada] border-solid border-l-[3px] border-transparent;
+        @apply flex items-center px-[21px] py-[12px] text-sm font-medium text-textColor border-solid border-l-[3px] border-transparent hover:text-white;
 
         &:hover {
             .right-icon {
@@ -11,7 +15,7 @@
         }
 
         &.active {
-            @apply border-[#9b4de0] text-white bg-[#ffffff1a];
+            @apply border-darkPrimary text-white bg-borderPrimary;
         }
     }
 
