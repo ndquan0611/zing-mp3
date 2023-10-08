@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -6,18 +6,25 @@ import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css/navigation';
 import 'swiper/css';
 
+import { ChevronLeftIcon, ChevronRightIcon } from '~/components/Icons';
 import Image from '~/components/Image';
+import { setCurSongId } from '~/redux/actions/musicAction';
 import styles from './Gallery.module.scss';
-import { ChevronLeftIcon, ChevronRightIcon } from '../Icons';
 
 const cx = classNames.bind(styles);
 
 function Gallery() {
     const { banner } = useSelector((state) => state.app);
-    console.log(banner);
+    const dispatch = useDispatch();
 
     const prevRef = useRef(null);
     const nextRef = useRef(null);
+
+    const handleClickBanner = (item) => {
+        if (item.type === 1) {
+            dispatch(setCurSongId(item.encodeId));
+        }
+    };
 
     return (
         <div className={cx('wrapper')}>
@@ -43,6 +50,7 @@ function Gallery() {
                                 src={item.banner}
                                 alt={item.title}
                                 className={cx('w-full h-auto object-cover rounded-lg')}
+                                onClick={() => handleClickBanner(item)}
                             />
                         </SwiperSlide>
                     ))}
