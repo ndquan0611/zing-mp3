@@ -2,10 +2,14 @@
 
 @layer components {
     .wrapper {
-        @apply flex;
+        @apply relative flex h-[calc(100vh-90px)];
     }
 
     .container {
-        @apply mt-[70px] px-[59px];
+        @apply overflow-hidden mt-[70px] px-[59px];
+    }
+
+    .content {
+        @apply flex-1;
     }
 }

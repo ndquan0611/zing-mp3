@@ -1,7 +1,9 @@
+import Gallery from '~/components/Gallery';
+
 function Home() {
     return (
-        <div>
-            <h2>Home page</h2>
+        <div id="home">
+            <Gallery />
         </div>
     );
 }
