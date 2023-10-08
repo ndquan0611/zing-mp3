@@ -5,6 +5,7 @@ import Tippy from '@tippyjs/react/headless';
 import { ClearIcon, SearchIcon, TrendIcon } from '~/components/Icons';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import styles from './Search.module.scss';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -39,6 +40,7 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(false);
+    
     const inputRef = useRef();
 
     useEffect(() => {
@@ -67,18 +69,30 @@ function Search() {
     return (
         <div>
             <Tippy
+                interactive
                 visible={showResult && searchResult.length > 0}
                 offset={[0, 0]}
                 render={(attrs) => (
                     <div className={cx('search-result')} tabIndex={-1} {...attrs}>
-                        <PopperWrapper>
+                        <PopperWrapper className={cx('search-menu')}>
                             <h4 className={cx('search-title')}>Đề xuất cho bạn</h4>
+                            {MENU_SEARCH.map((item, index) => (
+                                <Link
+                                    key={index}
+                                    className={cx(
+                                        'flex items-center text-white px-[10px] py-2 rounded hover:bg-borderPrimary',
+                                    )}
+                                >
+                                    {item.icon}
+                                    <span className={cx('flex-1 ml-[10px] text-[14px] font-normal')}>{item.title}</span>
+                                </Link>
+                            ))}
                         </PopperWrapper>
                     </div>
                 )}
                 onClickOutside={handleHideResult}
             >
-                <div className={cx('wrapper')}>
+                <div className={cx('wrapper', `${showResult ? 'is-collapse' : ''}`)}>
                     <button className={cx('search-btn')}>
                         <SearchIcon />
                     </button>

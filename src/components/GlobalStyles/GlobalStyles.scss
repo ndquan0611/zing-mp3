@@ -6,7 +6,7 @@
 
 @layer base {
     body {
-        @apply font-inter text-white bg-[#170f23];
+        @apply font-inter text-white bg-[#170f23] leading-normal;
     }
 
     button,
