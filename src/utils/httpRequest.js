@@ -9,4 +9,9 @@ export const get = async (path) => {
     return res.data;
 };
 
+export const getDetail = async (path, options) => {
+    const res = await request.get(path, options);
+    return res.data;
+};
+
 export default request;

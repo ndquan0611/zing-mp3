@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css/navigation';
@@ -16,6 +17,7 @@ const cx = classNames.bind(styles);
 function Gallery() {
     const { banner } = useSelector((state) => state.app);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const prevRef = useRef(null);
     const nextRef = useRef(null);
@@ -23,6 +25,9 @@ function Gallery() {
     const handleClickBanner = (item) => {
         if (item.type === 1) {
             dispatch(setCurSongId(item.encodeId));
+        } else if (item.type === 4) {
+            const path = item.link.split('.')[0];
+            navigate(path);
         }
     };
 

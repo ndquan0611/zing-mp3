@@ -2,7 +2,7 @@
 
 @layer components {
     .wrapper {
-        @apply fixed top-0 left-[240px] right-[330px] z-50 flex justify-center h-[70px];
+        @apply fixed top-0 left-[240px] right-0 z-50 flex justify-center h-[70px];
     }
 
     .inner {

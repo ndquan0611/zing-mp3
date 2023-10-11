@@ -6,6 +6,7 @@ import MyMusic from '~/pages/MyMusic';
 import Rating from '~/pages/Rating';
 import Hub from '~/pages/Hub';
 import Top100 from '~/pages/Top100';
+import Playlist from '~/pages/Playlist';
 
 const publicRoutes = [
     {
@@ -35,6 +36,10 @@ const publicRoutes = [
     {
         path: config.routes.top100,
         component: Top100,
+    },
+    {
+        path: config.routes.playlist,
+        component: Playlist,
     },
 ];
 

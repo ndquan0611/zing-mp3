@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 
@@ -9,11 +9,11 @@ const cx = classNames.bind(styles);
 
 function Player() {
     const { curSongId } = useSelector((state) => state.music);
+    const [infoSong, setInfoSong] = useState(null);
 
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await musicService.getDetailSong(curSongId);
-            console.log(res);
+            const res = await musicService.getInfoSong(curSongId);
         };
         fetchApi();
     }, [curSongId]);

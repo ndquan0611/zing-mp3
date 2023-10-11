@@ -2,11 +2,11 @@
 
 @layer components {
     .wrapper {
-        @apply relative flex h-[calc(100vh-90px)];
+        @apply relative flex h-[calc(100vh-90px)] overflow-hidden;
     }
 
     .container {
-        @apply overflow-hidden mt-[70px] px-[59px];
+        @apply max-w-full overflow-y-auto mt-[70px] px-[59px];
     }
 
     .content {

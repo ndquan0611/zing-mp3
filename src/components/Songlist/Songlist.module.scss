@@ -1,0 +1,31 @@
+@tailwind components;
+
+@layer components {
+    .select-item {
+        @apply hover:bg-borderPrimary;
+    }
+
+    .inner {
+        @apply p-[10px] flex items-center text-[12px] font-medium text-textSecondary border-b-[1px] border-solid border-borderPrimary rounded-[5px];
+    }
+
+    .left {
+        @apply w-1/2 flex items-center;
+    }
+
+    .content {
+        @apply flex-auto;
+    }
+
+    .right {
+        @apply flex-none;
+    }
+
+    .thumbnail {
+        @apply w-10 h-10 mr-[10px] rounded overflow-hidden;
+    }
+
+    .info {
+        @apply flex-1;
+    }
+}
