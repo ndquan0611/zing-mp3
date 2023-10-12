@@ -3,6 +3,12 @@
 @layer components {
     .select-item {
         @apply hover:bg-borderPrimary;
+
+        &.active {
+            .inner {
+                @apply bg-borderPrimary;
+            }
+        }
     }
 
     .inner {

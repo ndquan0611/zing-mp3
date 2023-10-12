@@ -1,29 +1,135 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 
+import { HeartIcon, MoreIcon, icons } from '~/components/Icons';
+import { play } from '~/redux/actions/musicAction';
 import * as musicService from '~/services/musicService';
+import Image from '~/components/Image';
 import styles from './Player.module.scss';
+import moment from 'moment';
 
+const { BiShuffle, BiSkipPrevious, BiSkipNext, BsRepeat, BsPlayCircle, BsPauseCircle, GiMicrophone, FiVolume2 } = icons;
 const cx = classNames.bind(styles);
+let intervalId;
 
 function Player() {
-    const { curSongId } = useSelector((state) => state.music);
-    const [infoSong, setInfoSong] = useState(null);
+    const { curSongId, isPlaying } = useSelector((state) => state.music);
+    const [infoSong, setInfoSong] = useState({});
+    const [curSeconds, setCurSeconds] = useState(0);
+    const [audio, setAudio] = useState(new Audio());
+    const dispatch = useDispatch();
+    const thumRef = useRef();
 
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await musicService.getInfoSong(curSongId);
+            const resultInfoSong = await musicService.getInfoSong(curSongId);
+            const resultSong = await musicService.getSong(curSongId);
+            setInfoSong(resultInfoSong);
+            if (resultSong) {
+                audio.pause();
+                setAudio(new Audio(resultSong['128']));
+            }
         };
         fetchApi();
     }, [curSongId]);
 
+    useEffect(() => {
+        if (isPlaying) {
+            intervalId = setInterval(() => {
+                let percent = Math.round((audio.currentTime * 10000) / infoSong.duration) / 100;
+                thumRef.current.style.cssText = `right: ${100 - percent}%`;
+                setCurSeconds(Math.round(audio.currentTime));
+            }, 200);
+        }
+
+        return () => {
+            intervalId && clearInterval(intervalId);
+        };
+    }, [isPlaying]);
+
+    useEffect(() => {
+        audio.load();
+        if (isPlaying) audio.play();
+    }, [audio]);
+
+    const handleTogglePlayMusic = () => {
+        if (isPlaying) {
+            audio.pause();
+            dispatch(play(false));
+        } else {
+            audio.play();
+            dispatch(play(true));
+        }
+    };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div>Detail</div>
-                <div>Main</div>
-                <div>Volumn</div>
+                <div className={cx('left')}>
+                    <div className={cx('thumbnail')}>
+                        <Image
+                            src={infoSong.thumbnailM}
+                            alt={infoSong.title}
+                            className={cx('w-full h-auto object-cover')}
+                        />
+                    </div>
+                    <div className={cx('info')}>
+                        <h3 className={cx('title')}>
+                            <Link to={infoSong.link}>{infoSong.title}</Link>
+                        </h3>
+                        <div className={cx('artists')}>
+                            <span>{infoSong.artistsNames}</span>
+                        </div>
+                    </div>
+                    <div className={cx('ml-[10px] flex items-center')}>
+                        <button className={cx('more-btn')}>
+                            <HeartIcon />
+                        </button>
+                        <button className={cx('more-btn')}>
+                            <MoreIcon />
+                        </button>
+                    </div>
+                </div>
+                <div className={cx('player-control')}>
+                    <div className={cx('w-full flex items-center justify-center')}>
+                        <button className={cx('player-btn')}>
+                            <BiShuffle />
+                        </button>
+                        <button className={cx('player-btn')}>
+                            <BiSkipPrevious size={28} />
+                        </button>
+                        <button className={cx('player-btn', 'play-btn')} onClick={handleTogglePlayMusic}>
+                            {isPlaying ? <BsPauseCircle size={34} /> : <BsPlayCircle size={34} />}
+                        </button>
+                        <button className={cx('player-btn')}>
+                            <BiSkipNext size={28} />
+                        </button>
+                        <button className={cx('player-btn')}>
+                            <BsRepeat />
+                        </button>
+                    </div>
+                    <div className={cx('w-full mt-3 flex items-center')}>
+                        <span className={cx('time-left', 'mr-[10px]')}>
+                            {moment.utc(curSeconds * 1000).format('mm:ss')}
+                        </span>
+                        <div className={cx('progress-bar')}>
+                            <div ref={thumRef} className={cx('absolute top-0 left-0 h-[3px] rounded bg-white')}></div>
+                        </div>
+                        <span className={cx('time-right', 'ml-[10px]')}>
+                            {moment.utc(infoSong.duration * 1000).format('mm:ss')}
+                        </span>
+                    </div>
+                </div>
+                <div className={cx('right')}>
+                    <button>
+                        <GiMicrophone />
+                    </button>
+                    <button>
+                        <FiVolume2 />
+                    </button>
+                </div>
             </div>
         </div>
     );

@@ -16,8 +16,6 @@ function Playlist() {
     const { id } = useParams();
     const [playlist, setPlaylist] = useState({});
 
-    console.log(playlist);
-
     useEffect(() => {
         const fetchApi = async () => {
             const result = await musicService.getDetailPlaylist(id);

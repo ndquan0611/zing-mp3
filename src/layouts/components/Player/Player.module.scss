@@ -8,4 +8,53 @@
     .inner {
         @apply w-full h-full px-5 flex items-center justify-between border-solid border-[1px] border-borderPrimary;
     }
+
+    .thumbnail {
+        @apply w-16 h-16 rounded overflow-hidden mr-[10px];
+    }
+
+    .left {
+        @apply w-[30%] flex items-center;
+    }
+
+    .right {
+        @apply w-[30%] flex items-center justify-end;
+    }
+
+    .title {
+        @apply text-sm font-medium;
+
+        a {
+            @apply text-white;
+        }
+    }
+
+    .artists {
+        @apply text-xs font-normal text-textSecondary;
+    }
+
+    .more-btn {
+        @apply w-8 h-8 flex items-center justify-center rounded-[50%] hover:bg-borderPrimary;
+    }
+
+    .player-control {
+        @apply flex-1 flex flex-col items-center;
+    }
+
+    .player-btn {
+        @apply w-8 h-8 mx-2 flex items-center justify-center rounded-[50%] hover:bg-borderPrimary;
+    }
+
+    .play-btn {
+        @apply hover:text-primary hover:bg-transparent;
+    }
+
+    .time-left,
+    .time-right {
+        @apply text-xs font-medium text-textSecondary;
+    }
+
+    .progress-bar {
+        @apply w-full m-auto relative h-[3px] bg-[#ffffff4d] rounded;
+    }
 }

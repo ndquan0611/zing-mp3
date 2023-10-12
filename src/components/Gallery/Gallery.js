@@ -9,7 +9,7 @@ import 'swiper/css';
 
 import { ChevronLeftIcon, ChevronRightIcon } from '~/components/Icons';
 import Image from '~/components/Image';
-import { setCurSongId } from '~/redux/actions/musicAction';
+import { play, setCurSongId } from '~/redux/actions/musicAction';
 import styles from './Gallery.module.scss';
 
 const cx = classNames.bind(styles);
@@ -25,6 +25,7 @@ function Gallery() {
     const handleClickBanner = (item) => {
         if (item.type === 1) {
             dispatch(setCurSongId(item.encodeId));
+            dispatch(play(true));
         } else if (item.type === 4) {
             const path = item.link.split('.')[0];
             navigate(path);

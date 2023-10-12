@@ -1,19 +1,30 @@
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import classNames from 'classnames/bind';
 
-import { setCurSongId } from '~/redux/actions/musicAction';
+import { play, setCurSongId } from '~/redux/actions/musicAction';
 import Image from '~/components/Image';
 import styles from './Songlist.module.scss';
 
 const cx = classNames.bind(styles);
 
 function SonglistItem({ data = {} }) {
+    const [isActive, setIsActive] = useState(false);
     const dispatch = useDispatch();
 
     return (
-        <div className={cx('select-item')} onClick={() => dispatch(setCurSongId(data.encodeId))}>
+        <div
+            className={cx('select-item', `${isActive ? 'active' : ''}`)}
+            onClick={() => {
+                setIsActive(!isActive);
+            }}
+            onDoubleClick={() => {
+                dispatch(setCurSongId(data.encodeId));
+                dispatch(play(true));
+            }}
+        >
             <div className={cx('inner')}>
                 <div className={cx('left')}>
                     <div className={cx('thumbnail')}>

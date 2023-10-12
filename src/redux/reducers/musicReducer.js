@@ -1,7 +1,8 @@
-import { SET_CUR_SONG_ID } from '../constant';
+import { PLAY, SET_CUR_SONG_ID } from '../constant';
 
 const initState = {
     curSongId: null,
+    isPlaying: false,
 };
 
 const musicReducer = (state = initState, action) => {
@@ -10,6 +11,11 @@ const musicReducer = (state = initState, action) => {
             return {
                 ...state,
                 curSongId: action.payload || null,
+            };
+        case PLAY:
+            return {
+                ...state,
+                isPlaying: action.payload,
             };
         default:
             return state;

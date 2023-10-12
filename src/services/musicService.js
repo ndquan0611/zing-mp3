@@ -7,7 +7,7 @@ export const getSong = async (id) => {
                 id: id,
             },
         });
-        return res;
+        return res.data;
     } catch (error) {
         console.log(error);
     }
@@ -20,7 +20,7 @@ export const getInfoSong = async (id) => {
                 id: id,
             },
         });
-        return res;
+        return res.data;
     } catch (error) {
         console.log(error);
     }
