@@ -1,0 +1,36 @@
+@tailwind components;
+
+@layer components {
+    .wrapper {
+    }
+
+    .inner {
+        @apply mx-[-15px] flex items-center;
+    }
+
+    .carousel-item {
+        @apply px-[14px] w-1/5;
+    }
+
+    .thumbnail {
+        @apply overflow-hidden rounded-[5px];
+
+        &:hover {
+            img {
+                @apply scale-110 brightness-90;
+            }
+        }
+    }
+
+    .info {
+        @apply mt-3;
+    }
+
+    .subtitle {
+        @apply text-[14px] font-normal text-textSecondary text-ellipsis overflow-hidden;
+
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+    }
+}

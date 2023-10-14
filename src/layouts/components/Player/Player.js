@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 
 import { HeartIcon, MoreIcon, icons } from '~/components/Icons';
-import { play } from '~/redux/actions/musicAction';
+import { play, setCurSongId } from '~/redux/actions/musicAction';
 import * as musicService from '~/services/musicService';
 import Image from '~/components/Image';
 import styles from './Player.module.scss';
@@ -15,12 +15,15 @@ const cx = classNames.bind(styles);
 let intervalId;
 
 function Player() {
-    const { curSongId, isPlaying } = useSelector((state) => state.music);
+    const { curSongId, isPlaying, songs } = useSelector((state) => state.music);
     const [infoSong, setInfoSong] = useState({});
     const [curSeconds, setCurSeconds] = useState(0);
+    const [isShuffle, setIsShuffle] = useState(false);
     const [audio, setAudio] = useState(new Audio());
     const dispatch = useDispatch();
+
     const thumRef = useRef();
+    const trackRef = useRef();
 
     useEffect(() => {
         const fetchApi = async () => {
@@ -30,13 +33,23 @@ function Player() {
             if (resultSong) {
                 audio.pause();
                 setAudio(new Audio(resultSong['128']));
+            } else {
+                audio.pause();
+                setAudio(new Audio());
+                dispatch(play(false));
+                // toast
+                console.log('vip');
             }
         };
         fetchApi();
     }, [curSongId]);
 
     useEffect(() => {
+        audio.pause();
+        audio.load();
+        audio.currentTime = 0;
         if (isPlaying) {
+            audio.play();
             intervalId = setInterval(() => {
                 let percent = Math.round((audio.currentTime * 10000) / infoSong.duration) / 100;
                 thumRef.current.style.cssText = `right: ${100 - percent}%`;
@@ -47,11 +60,6 @@ function Player() {
         return () => {
             intervalId && clearInterval(intervalId);
         };
-    }, [isPlaying]);
-
-    useEffect(() => {
-        audio.load();
-        if (isPlaying) audio.play();
     }, [audio]);
 
     const handleTogglePlayMusic = () => {
@@ -63,6 +71,42 @@ function Player() {
             dispatch(play(true));
         }
     };
+
+    const handleClickProgressbar = (e) => {
+        const tractRect = trackRef.current.getBoundingClientRect();
+        const percent = Math.round(((e.clientX - tractRect.left) * 10000) / tractRect.width) / 100;
+        thumRef.current.style.cssText = `right: ${100 - percent}%`;
+        audio.currentTime = (percent * infoSong.duration) / 100;
+        setCurSeconds(Math.round((percent * infoSong.duration) / 100));
+    };
+
+    const handlePrevSong = () => {
+        if (songs) {
+            let currentSongIndex;
+            songs.forEach((item, index) => {
+                if (item.encodeId === curSongId) {
+                    currentSongIndex = index;
+                }
+            });
+            dispatch(setCurSongId(songs[currentSongIndex - 1].encodeId));
+            dispatch(play(true));
+        }
+    };
+
+    const handleNextSong = () => {
+        if (songs) {
+            let currentSongIndex;
+            songs?.forEach((item, index) => {
+                if (item.encodeId === curSongId) {
+                    currentSongIndex = index;
+                }
+            });
+            dispatch(setCurSongId(songs[currentSongIndex + 1].encodeId));
+            dispatch(play(true));
+        }
+    };
+
+    const handleShuffle = () => {};
 
     return (
         <div className={cx('wrapper')}>
@@ -94,16 +138,25 @@ function Player() {
                 </div>
                 <div className={cx('player-control')}>
                     <div className={cx('w-full flex items-center justify-center')}>
-                        <button className={cx('player-btn')}>
+                        <button
+                            className={cx('player-btn', `${isShuffle && 'text-primary'}`)}
+                            onClick={() => setIsShuffle((prev) => !prev)}
+                        >
                             <BiShuffle />
                         </button>
-                        <button className={cx('player-btn')}>
+                        <button
+                            className={cx('player-btn', `${!songs ? 'pointer-events-auto opacity-50' : ''}`)}
+                            onClick={handlePrevSong}
+                        >
                             <BiSkipPrevious size={28} />
                         </button>
                         <button className={cx('player-btn', 'play-btn')} onClick={handleTogglePlayMusic}>
                             {isPlaying ? <BsPauseCircle size={34} /> : <BsPlayCircle size={34} />}
                         </button>
-                        <button className={cx('player-btn')}>
+                        <button
+                            className={cx('player-btn', `${!songs ? 'pointer-events-auto opacity-50' : ''}`)}
+                            onClick={handleNextSong}
+                        >
                             <BiSkipNext size={28} />
                         </button>
                         <button className={cx('player-btn')}>
@@ -114,8 +167,8 @@ function Player() {
                         <span className={cx('time-left', 'mr-[10px]')}>
                             {moment.utc(curSeconds * 1000).format('mm:ss')}
                         </span>
-                        <div className={cx('progress-bar')}>
-                            <div ref={thumRef} className={cx('absolute top-0 left-0 h-[3px] rounded bg-white')}></div>
+                        <div ref={trackRef} className={cx('progress-bar')} onClick={handleClickProgressbar}>
+                            <div ref={thumRef} className={cx('absolute top-0 left-0 bottom-0 rounded bg-white')}></div>
                         </div>
                         <span className={cx('time-right', 'ml-[10px]')}>
                             {moment.utc(infoSong.duration * 1000).format('mm:ss')}

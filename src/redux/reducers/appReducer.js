@@ -2,6 +2,7 @@ import { GET_HOME } from '../constant';
 
 const initState = {
     banner: [],
+    chill: {},
 };
 
 const appReducer = (state = initState, action) => {
@@ -9,7 +10,8 @@ const appReducer = (state = initState, action) => {
         case GET_HOME:
             return {
                 ...state,
-                banner: action.payload.items.find((item) => item.sectionType === 'banner').items || null,
+                banner: action.payload.items.find((item) => item.sectionId === 'hSlider').items || null,
+                chill: action.payload.items.find((item) => item.sectionId === 'hEditorTheme') || {},
             };
         default:
             return state;

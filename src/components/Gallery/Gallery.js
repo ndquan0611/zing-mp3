@@ -9,7 +9,7 @@ import 'swiper/css';
 
 import { ChevronLeftIcon, ChevronRightIcon } from '~/components/Icons';
 import Image from '~/components/Image';
-import { play, setCurSongId } from '~/redux/actions/musicAction';
+import { getSongs, play, setCurSongId } from '~/redux/actions/musicAction';
 import styles from './Gallery.module.scss';
 
 const cx = classNames.bind(styles);
@@ -26,9 +26,12 @@ function Gallery() {
         if (item.type === 1) {
             dispatch(setCurSongId(item.encodeId));
             dispatch(play(true));
+            dispatch(getSongs(null));
         } else if (item.type === 4) {
             const path = item.link.split('.')[0];
             navigate(path);
+        } else {
+            dispatch(getSongs(null));
         }
     };
 

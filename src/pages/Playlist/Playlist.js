@@ -1,25 +1,29 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames/bind';
 
 import * as musicService from '~/services/musicService';
+import { getSongs } from '~/redux/actions/musicAction';
 import { handleTimer } from '~/convert/handleTimer';
 import Image from '~/components/Image';
 import Songlist from '~/components/Songlist';
-import styles from './Playlist.module.scss';
 import Button from '~/components/Button';
+import styles from './Playlist.module.scss';
 
 const cx = classNames.bind(styles);
 
 function Playlist() {
     const { id } = useParams();
+    const dispatch = useDispatch();
     const [playlist, setPlaylist] = useState({});
 
     useEffect(() => {
         const fetchApi = async () => {
             const result = await musicService.getDetailPlaylist(id);
             setPlaylist(result);
+            dispatch(getSongs(result.song?.items));
         };
         fetchApi();
     }, []);
@@ -58,7 +62,7 @@ function Playlist() {
                         <span>{playlist.description}</span>
                     </div>
                     <div className={cx('mb-[10px]')}>
-                        <Songlist data={playlist.song?.items} />
+                        <Songlist />
                     </div>
                     <div className={cx('total')}>
                         <span className={cx('mr-2')}>{playlist.song?.total} bài hát</span>•

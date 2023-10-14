@@ -1,0 +1,15 @@
+@tailwind components;
+
+@layer components {
+    .wrapper {
+        @apply mt-12;
+    }
+
+    .title {
+        @apply mb-5 flex items-center justify-between text-[20px] font-bold capitalize;
+    }
+
+    .discovery-btn {
+        @apply flex items-center text-textColor text-[12px] font-medium uppercase hover:text-primary;
+    }
+}

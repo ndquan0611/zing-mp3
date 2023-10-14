@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 import SonglistItem from './SonglistItem';
 import styles from './Songlist.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Songlist({ data = [] }) {
+function Songlist() {
+    const { songs } = useSelector((state) => state.music);
+
     return (
         <Fragment>
             <div className={cx('inner', 'uppercase')}>
@@ -21,7 +24,7 @@ function Songlist({ data = [] }) {
                 </div>
             </div>
             <div className={cx('list')}>
-                {data.map((item) => (
+                {songs?.map((item) => (
                     <SonglistItem key={item.encodeId} data={item} />
                 ))}
             </div>

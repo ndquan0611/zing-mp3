@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 
-import { play, setCurSongId } from '~/redux/actions/musicAction';
+import { play, playAlbum, setCurSongId } from '~/redux/actions/musicAction';
 import Image from '~/components/Image';
 import styles from './Songlist.module.scss';
 
@@ -23,6 +23,7 @@ function SonglistItem({ data = {} }) {
             onDoubleClick={() => {
                 dispatch(setCurSongId(data.encodeId));
                 dispatch(play(true));
+                dispatch(playAlbum(true));
             }}
         >
             <div className={cx('inner')}>

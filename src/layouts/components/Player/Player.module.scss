@@ -55,6 +55,6 @@
     }
 
     .progress-bar {
-        @apply w-full m-auto relative h-[3px] bg-[#ffffff4d] rounded;
+        @apply w-full m-auto relative h-[3px] hover:h-[5px] bg-[#ffffff4d] rounded cursor-pointer;
     }
 }
