@@ -5,6 +5,10 @@
         @apply pt-5;
     }
 
+    .inner {
+        @apply flex items-start pt-5;
+    }
+
     .thumbnail {
         @apply rounded-lg overflow-hidden;
 

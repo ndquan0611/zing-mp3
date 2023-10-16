@@ -2,6 +2,7 @@
 
 @layer components {
     .wrapper {
+        @apply relative;
     }
 
     .inner {
@@ -18,6 +19,7 @@
         &:hover {
             img {
                 @apply scale-110 brightness-90;
+                transition: all 0.3s ease-in-out;
             }
         }
     }

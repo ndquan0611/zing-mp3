@@ -8,14 +8,13 @@ import styles from './Carousel.module.scss';
 const cx = classNames.bind(styles);
 
 function Carousel({ data = [] }) {
-    console.log(data);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
                 {data.map((item) => (
                     <div key={item.encodeId} className={cx('carousel-item')}>
                         <div className={cx('thumbnail')}>
-                            <Link to={item.link}>
+                            <Link to={item.link.split('.')[0]}>
                                 <Image
                                     src={item.thumbnailM}
                                     alt={item.title}

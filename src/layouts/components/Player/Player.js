@@ -16,10 +16,13 @@ let intervalId;
 
 function Player() {
     const { curSongId, isPlaying, songs } = useSelector((state) => state.music);
+
     const [infoSong, setInfoSong] = useState({});
     const [curSeconds, setCurSeconds] = useState(0);
     const [isShuffle, setIsShuffle] = useState(false);
+    const [isRepeat, setIsRepeat] = useState(false);
     const [audio, setAudio] = useState(new Audio());
+
     const dispatch = useDispatch();
 
     const thumRef = useRef();
@@ -61,6 +64,25 @@ function Player() {
             intervalId && clearInterval(intervalId);
         };
     }, [audio]);
+
+    useEffect(() => {
+        const handleEnded = () => {
+            if (isShuffle) {
+                handleShuffle();
+            } else if (isRepeat) {
+                handleNextSong();
+            } else {
+                audio.pause();
+                dispatch(play(false));
+            }
+        };
+
+        audio.addEventListener('ended', handleEnded);
+
+        return () => {
+            audio.removeEventListener('ended', handleEnded);
+        };
+    }, [audio, isShuffle, isRepeat]);
 
     const handleTogglePlayMusic = () => {
         if (isPlaying) {
@@ -106,7 +128,15 @@ function Player() {
         }
     };
 
-    const handleShuffle = () => {};
+    const handleShuffle = () => {
+        const randomIndex = Math.round(Math.random() * songs?.length - 1);
+        dispatch(setCurSongId(songs[randomIndex].encodeId));
+        dispatch(play(true));
+    };
+
+    const handleRepeat = () => {
+        setIsRepeat((prev) => !prev);
+    };
 
     return (
         <div className={cx('wrapper')}>
@@ -159,7 +189,7 @@ function Player() {
                         >
                             <BiSkipNext size={28} />
                         </button>
-                        <button className={cx('player-btn')}>
+                        <button className={cx('player-btn', `${isRepeat && 'text-primary'}`)} onClick={handleRepeat}>
                             <BsRepeat />
                         </button>
                     </div>

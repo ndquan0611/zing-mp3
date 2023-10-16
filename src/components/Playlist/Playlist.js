@@ -14,7 +14,7 @@ function Playlist() {
             <h3 className={cx('title')}>
                 <span>{chill.title}</span>
                 {!!chill.link && (
-                    <Link to={chill.link} className={cx('discovery-btn')}>
+                    <Link to={chill.link.split('.')[0]} className={cx('discovery-btn')}>
                         Tất cả
                     </Link>
                 )}

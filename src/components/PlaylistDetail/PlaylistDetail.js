@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import moment from 'moment';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 import classNames from 'classnames/bind';
 
 import * as musicService from '~/services/musicService';
 import { getSongs } from '~/redux/actions/musicAction';
 import { handleTimer } from '~/convert/handleTimer';
 import Image from '~/components/Image';
-import Songlist from '~/components/Songlist';
 import Button from '~/components/Button';
-import styles from './Playlist.module.scss';
+import Songlist from '~/components/Songlist';
+import styles from './PlaylistDetail.module.scss';
+import { useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function Playlist() {
+function PlaylistDetail() {
     const { id } = useParams();
     const dispatch = useDispatch();
     const [playlist, setPlaylist] = useState({});
@@ -30,7 +30,7 @@ function Playlist() {
 
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('flex items-start pt-5')}>
+            <div className={cx('inner')}>
                 <div className={cx('sticky top-10 w-[300px] float-left')}>
                     <div className={cx('thumbnail')}>
                         <Image
@@ -74,4 +74,4 @@ function Playlist() {
     );
 }
 
-export default Playlist;
+export default PlaylistDetail;
