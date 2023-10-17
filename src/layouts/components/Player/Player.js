@@ -10,7 +10,17 @@ import Image from '~/components/Image';
 import styles from './Player.module.scss';
 import moment from 'moment';
 
-const { BiShuffle, BiSkipPrevious, BiSkipNext, BsRepeat, BsPlayCircle, BsPauseCircle, GiMicrophone, FiVolume2 } = icons;
+const {
+    BiShuffle,
+    BiSkipPrevious,
+    BiSkipNext,
+    BsRepeat,
+    BsPlayCircle,
+    BsPauseCircle,
+    GiMicrophone,
+    FiVolume2,
+    PiRepeatOnceLight,
+} = icons;
 const cx = classNames.bind(styles);
 let intervalId;
 
@@ -20,7 +30,7 @@ function Player() {
     const [infoSong, setInfoSong] = useState({});
     const [curSeconds, setCurSeconds] = useState(0);
     const [isShuffle, setIsShuffle] = useState(false);
-    const [isRepeat, setIsRepeat] = useState(false);
+    const [repeatMode, setRepeatMode] = useState(0);
     const [audio, setAudio] = useState(new Audio());
 
     const dispatch = useDispatch();
@@ -69,11 +79,10 @@ function Player() {
         const handleEnded = () => {
             if (isShuffle) {
                 handleShuffle();
-            } else if (isRepeat) {
-                handleNextSong();
+            } else if (repeatMode) {
+                repeatMode === 1 ? handleNextSong() : handleRepeatOnce();
             } else {
-                audio.pause();
-                dispatch(play(false));
+                handleNextSong();
             }
         };
 
@@ -82,7 +91,7 @@ function Player() {
         return () => {
             audio.removeEventListener('ended', handleEnded);
         };
-    }, [audio, isShuffle, isRepeat]);
+    }, [audio, isShuffle, repeatMode]);
 
     const handleTogglePlayMusic = () => {
         if (isPlaying) {
@@ -134,8 +143,8 @@ function Player() {
         dispatch(play(true));
     };
 
-    const handleRepeat = () => {
-        setIsRepeat((prev) => !prev);
+    const handleRepeatOnce = () => {
+        audio.play();
     };
 
     return (
@@ -189,8 +198,11 @@ function Player() {
                         >
                             <BiSkipNext size={28} />
                         </button>
-                        <button className={cx('player-btn', `${isRepeat && 'text-primary'}`)} onClick={handleRepeat}>
-                            <BsRepeat />
+                        <button
+                            className={cx('player-btn', `${repeatMode && 'text-primary'}`)}
+                            onClick={() => setRepeatMode((prev) => (prev === 2 ? 0 : prev + 1))}
+                        >
+                            {repeatMode === 2 ? <PiRepeatOnceLight /> : <BsRepeat />}
                         </button>
                     </div>
                     <div className={cx('w-full mt-3 flex items-center')}>

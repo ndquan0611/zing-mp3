@@ -1,7 +1,8 @@
 import { BiShuffle, BiSkipPrevious, BiSkipNext } from 'react-icons/bi';
-import { BsRepeat, BsPlayCircle, BsPauseCircle } from 'react-icons/bs';
+import { BsRepeat, BsPlayCircle, BsPauseCircle, BsFillPlayFill } from 'react-icons/bs';
 import { GiMicrophone } from 'react-icons/gi';
 import { FiVolume2 } from 'react-icons/fi';
+import { PiRepeatOnceLight } from 'react-icons/pi';
 
 export const icons = {
     BiShuffle,
@@ -12,6 +13,8 @@ export const icons = {
     BsPauseCircle,
     GiMicrophone,
     FiVolume2,
+    PiRepeatOnceLight,
+    BsFillPlayFill,
 };
 
 export const DiscoverIcon = ({ width = '1.5rem', height = '1.5rem', className }) => (

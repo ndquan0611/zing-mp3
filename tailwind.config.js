@@ -15,6 +15,34 @@ module.exports = {
                 textSecondary: '#ffffff80',
                 borderPrimary: '#ffffff1a',
                 bgPrimary: '#34224f',
+                'overlay-30': 'rgba(0, 0, 0, 0.3)',
+            },
+            keyframes: {
+                rotateCenter: {
+                    '0%': {
+                        '-webkit-transform': 'rotate(0);',
+                        transform: 'rotate(0);',
+                    },
+                    '100%': {
+                        '-webkit-transform': 'rotate(360deg);',
+                        transform: 'rotate(360deg);',
+                    },
+                },
+                rotateCenterPause: {
+                    '0%': {
+                        '-webkit-transform': 'rotate(360deg);',
+                        transform: 'rotate(360deg);',
+                        'border-radius': '99999px',
+                    },
+                    '100%': {
+                        '-webkit-transform': 'rotate(0);',
+                        transform: 'rotate(0);',
+                    },
+                },
+            },
+            animation: {
+                rotateCenter: 'rotateCenter 10s linear infinite;',
+                rotateCenterPause: 'rotateCenterPause 0.2s linear 2 both;',
             },
         },
     },
