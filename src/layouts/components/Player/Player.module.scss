@@ -18,7 +18,7 @@
     }
 
     .right {
-        @apply w-[30%] flex items-center justify-end;
+        @apply w-[30%] flex items-center justify-end gap-4;
     }
 
     .title {
@@ -42,11 +42,11 @@
     }
 
     .player-btn {
-        @apply w-8 h-8 mx-2 flex items-center justify-center rounded-[50%] hover:bg-borderPrimary;
+        @apply p-1 mx-2 flex items-center justify-center rounded-[50%] hover:bg-borderPrimary;
     }
 
     .play-btn {
-        @apply hover:text-primary hover:bg-transparent;
+        @apply hover:text-primary hover:border-primary hover:bg-transparent rounded-full border-white border border-solid;
     }
 
     .time-left,

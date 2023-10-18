@@ -5,32 +5,38 @@ import classNames from 'classnames/bind';
 
 import { HeartIcon, MoreIcon, icons } from '~/components/Icons';
 import { play, setCurSongId } from '~/redux/actions/musicAction';
+import { show } from '~/redux/actions/homeAction';
 import * as musicService from '~/services/musicService';
 import Image from '~/components/Image';
 import styles from './Player.module.scss';
 import moment from 'moment';
+import { Loading } from '~/components/Loading';
 
 const {
     BiShuffle,
     BiSkipPrevious,
     BiSkipNext,
     BsRepeat,
-    BsPlayCircle,
-    BsPauseCircle,
-    GiMicrophone,
-    FiVolume2,
+    BsPauseFill,
+    BsPlayFill,
     PiRepeatOnceLight,
+    BsMusicNoteList,
+    BsFillVolumeDownFill,
+    BsFillVolumeMuteFill,
 } = icons;
 const cx = classNames.bind(styles);
 let intervalId;
 
 function Player() {
+    const { isShow } = useSelector((state) => state.app);
     const { curSongId, isPlaying, songs } = useSelector((state) => state.music);
 
     const [infoSong, setInfoSong] = useState({});
     const [curSeconds, setCurSeconds] = useState(0);
     const [isShuffle, setIsShuffle] = useState(false);
     const [repeatMode, setRepeatMode] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
+    const [volume, setVolume] = useState(100);
     const [audio, setAudio] = useState(new Audio());
 
     const dispatch = useDispatch();
@@ -40,6 +46,7 @@ function Player() {
 
     useEffect(() => {
         const fetchApi = async () => {
+            setIsLoading(false);
             const resultInfoSong = await musicService.getInfoSong(curSongId);
             const resultSong = await musicService.getSong(curSongId);
             setInfoSong(resultInfoSong);
@@ -53,6 +60,7 @@ function Player() {
                 // toast
                 console.log('vip');
             }
+            setIsLoading(true);
         };
         fetchApi();
     }, [curSongId]);
@@ -92,6 +100,10 @@ function Player() {
             audio.removeEventListener('ended', handleEnded);
         };
     }, [audio, isShuffle, repeatMode]);
+
+    useEffect(() => {
+        audio.volume = volume / 100;
+    }, [volume]);
 
     const handleTogglePlayMusic = () => {
         if (isPlaying) {
@@ -190,7 +202,13 @@ function Player() {
                             <BiSkipPrevious size={28} />
                         </button>
                         <button className={cx('player-btn', 'play-btn')} onClick={handleTogglePlayMusic}>
-                            {isPlaying ? <BsPauseCircle size={34} /> : <BsPlayCircle size={34} />}
+                            {!isLoading ? (
+                                <Loading />
+                            ) : isPlaying ? (
+                                <BsPauseFill size={30} />
+                            ) : (
+                                <BsPlayFill size={30} />
+                            )}
                         </button>
                         <button
                             className={cx('player-btn', `${!songs ? 'pointer-events-auto opacity-50' : ''}`)}
@@ -218,11 +236,28 @@ function Player() {
                     </div>
                 </div>
                 <div className={cx('right')}>
-                    <button>
-                        <GiMicrophone />
-                    </button>
-                    <button>
-                        <FiVolume2 />
+                    <div className={cx('flex items-center gap-1')}>
+                        <button
+                            onClick={() => {
+                                setVolume((prev) => (prev === 0 ? 50 : 0));
+                            }}
+                        >
+                            {+volume === 0 ? <BsFillVolumeMuteFill size={24} /> : <BsFillVolumeDownFill size={24} />}
+                        </button>
+                        <input
+                            type="range"
+                            step={1}
+                            min={0}
+                            max={100}
+                            value={volume}
+                            onChange={(e) => setVolume(e.target.value)}
+                        />
+                    </div>
+                    <button
+                        className={cx('p-1 rounded-[4px] bg-darkPrimary hover:opacity-100 opacity-90 cursor-pointer')}
+                        onClick={() => dispatch(show(!isShow))}
+                    >
+                        <BsMusicNoteList />
                     </button>
                 </div>
             </div>

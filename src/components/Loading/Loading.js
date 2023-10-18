@@ -1,17 +1,7 @@
-import { Audio } from 'react-loader-spinner';
+import { RotatingLines } from 'react-loader-spinner';
 
 function Loading() {
-    return (
-        <Audio
-            height="30"
-            width="30"
-            color="#fff"
-            ariaLabel="audio-loading"
-            wrapperStyle={{}}
-            wrapperClass="wrapper-class"
-            visible={true}
-        />
-    );
+    return <RotatingLines strokeColor="grey" strokeWidth="5" animationDuration="0.75" width="30" visible={true} />;
 }
 
 export default Loading;

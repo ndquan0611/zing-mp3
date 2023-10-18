@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import { useSelector } from 'react-redux';
 
 import { ArrowLeftIcon, ArrowRightIcon, DownloadIcon, SettingIcon } from '~/components/Icons';
 import Button from '~/components/Button';
@@ -9,8 +10,10 @@ import Image from '~/components/Image';
 const cx = classNames.bind(styles);
 
 function Header() {
+    const { isShow } = useSelector((state) => state.app);
+
     return (
-        <header className={cx('wrapper')}>
+        <header className={cx('wrapper', `${isShow && 'right-[330px]'}`)}>
             <div className={cx('inner')}>
                 <div className={cx('flex items-center')}>
                     <button className={cx('mr-5')}>

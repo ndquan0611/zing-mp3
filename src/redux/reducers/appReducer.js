@@ -1,8 +1,9 @@
-import { GET_HOME } from '../constant';
+import { GET_HOME, SHOW } from '../constant';
 
 const initState = {
     banner: [],
     chill: {},
+    isShow: false,
 };
 
 const appReducer = (state = initState, action) => {
@@ -12,6 +13,11 @@ const appReducer = (state = initState, action) => {
                 ...state,
                 banner: action.payload.items.find((item) => item.sectionId === 'hSlider').items || null,
                 chill: action.payload.items.find((item) => item.sectionId === 'hEditorTheme') || {},
+            };
+        case SHOW:
+            return {
+                ...state,
+                isShow: action.payload,
             };
         default:
             return state;

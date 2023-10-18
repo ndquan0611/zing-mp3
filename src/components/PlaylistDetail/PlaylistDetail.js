@@ -5,10 +5,10 @@ import moment from 'moment';
 import classNames from 'classnames/bind';
 
 import * as musicService from '~/services/musicService';
-import { getSongs, play } from '~/redux/actions/musicAction';
+import { getSongs } from '~/redux/actions/musicAction';
 import { handleTimer } from '~/convert/handleTimer';
 import { icons } from '~/components/Icons';
-import Loading from '~/components/Loading/';
+import { AudioLoading } from '~/components/Loading';
 import Image from '~/components/Image';
 import Button from '~/components/Button';
 import Songlist from '~/components/Songlist';
@@ -59,7 +59,7 @@ function PlaylistDetail() {
                             )}
                         >
                             <div className={cx('p-2 border border-white rounded-full')}>
-                                {isPlaying ? <Loading /> : <BsFillPlayFill size={30} />}
+                                {isPlaying ? <AudioLoading /> : <BsFillPlayFill size={30} />}
                             </div>
                         </div>
                     </div>

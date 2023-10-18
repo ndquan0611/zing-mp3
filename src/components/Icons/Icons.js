@@ -1,5 +1,13 @@
 import { BiShuffle, BiSkipPrevious, BiSkipNext } from 'react-icons/bi';
-import { BsRepeat, BsPlayCircle, BsPauseCircle, BsFillPlayFill } from 'react-icons/bs';
+import {
+    BsRepeat,
+    BsPauseFill,
+    BsPlayFill,
+    BsFillPlayFill,
+    BsMusicNoteList,
+    BsFillVolumeDownFill,
+    BsFillVolumeMuteFill,
+} from 'react-icons/bs';
 import { GiMicrophone } from 'react-icons/gi';
 import { FiVolume2 } from 'react-icons/fi';
 import { PiRepeatOnceLight } from 'react-icons/pi';
@@ -9,12 +17,15 @@ export const icons = {
     BiSkipPrevious,
     BiSkipNext,
     BsRepeat,
-    BsPlayCircle,
-    BsPauseCircle,
+    BsPlayFill,
+    BsPauseFill,
     GiMicrophone,
     FiVolume2,
     PiRepeatOnceLight,
     BsFillPlayFill,
+    BsMusicNoteList,
+    BsFillVolumeDownFill,
+    BsFillVolumeMuteFill,
 };
 
 export const DiscoverIcon = ({ width = '1.5rem', height = '1.5rem', className }) => (
