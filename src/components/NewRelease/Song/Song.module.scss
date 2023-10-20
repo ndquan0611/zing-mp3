@@ -1,0 +1,35 @@
+@tailwind components;
+
+@layer components {
+    .wrapper {
+        @apply -mx-[15px] flex items-center;
+    }
+
+    .song-card {
+        @apply w-1/3 px-[14px];
+    }
+
+    .song-item {
+        @apply p-[10px] flex rounded-[5px] hover:bg-borderPrimary;
+    }
+
+    .thumbnail {
+        @apply w-[60px] h-[60px] mr-[10px] rounded overflow-hidden;
+    }
+
+    .title {
+        @apply text-[14px] font-bold text-white;
+    }
+
+    .subtitle {
+        @apply text-[12px] font-normal text-textSecondary cursor-pointer;
+
+        a {
+            @apply text-current hover:text-primary hover:underline;
+        }
+    }
+
+    .time-release {
+        @apply text-[12px] font-normal text-textSecondary;
+    }
+}

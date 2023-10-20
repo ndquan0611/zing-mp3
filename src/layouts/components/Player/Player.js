@@ -10,7 +10,7 @@ import * as musicService from '~/services/musicService';
 import Image from '~/components/Image';
 import styles from './Player.module.scss';
 import moment from 'moment';
-import { Loading } from '~/components/Loading';
+import { SongLoading } from '~/components/Loading';
 
 const {
     BiShuffle,
@@ -203,7 +203,7 @@ function Player() {
                         </button>
                         <button className={cx('player-btn', 'play-btn')} onClick={handleTogglePlayMusic}>
                             {!isLoading ? (
-                                <Loading />
+                                <SongLoading />
                             ) : isPlaying ? (
                                 <BsPauseFill size={30} />
                             ) : (
@@ -254,7 +254,10 @@ function Player() {
                         />
                     </div>
                     <button
-                        className={cx('p-1 rounded-[4px] bg-darkPrimary hover:opacity-100 opacity-90 cursor-pointer')}
+                        className={cx(
+                            'p-2 rounded-[4px] bg-borderPrimary hover:opacity-100 opacity-90 cursor-pointer',
+                            `${isShow && '!bg-darkPrimary'}`,
+                        )}
                         onClick={() => dispatch(show(!isShow))}
                     >
                         <BsMusicNoteList />

@@ -3,7 +3,7 @@ import PlaylistDetail from '~/components/PlaylistDetail';
 function Album() {
     return (
         <div id="album">
-            <PlaylistDetail/>
+            <PlaylistDetail />
         </div>
     );
 }

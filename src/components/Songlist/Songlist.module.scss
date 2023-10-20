@@ -34,4 +34,12 @@
     .info {
         @apply flex-1;
     }
+
+    .subtitle {
+        @apply text-[12px] font-normal text-textSecondary;
+
+        a {
+            @apply text-current hover:text-primary hover:underline;
+        }
+    }
 }

@@ -1,7 +1,17 @@
-import { RotatingLines } from 'react-loader-spinner';
+import { Triangle } from 'react-loader-spinner';
 
 function Loading() {
-    return <RotatingLines strokeColor="grey" strokeWidth="5" animationDuration="0.75" width="30" visible={true} />;
+    return (
+        <Triangle
+            height="80"
+            width="80"
+            color="#4fa94d"
+            ariaLabel="triangle-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+        />
+    );
 }
 
 export default Loading;

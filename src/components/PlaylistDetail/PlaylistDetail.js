@@ -5,7 +5,8 @@ import moment from 'moment';
 import classNames from 'classnames/bind';
 
 import * as musicService from '~/services/musicService';
-import { getSongs } from '~/redux/actions/musicAction';
+import { getSongs, play } from '~/redux/actions/musicAction';
+import { loading } from '~/redux/actions/homeAction';
 import { handleTimer } from '~/convert/handleTimer';
 import { icons } from '~/components/Icons';
 import { AudioLoading } from '~/components/Loading';
@@ -19,19 +20,21 @@ const { BsFillPlayFill } = icons;
 
 function PlaylistDetail() {
     const { id } = useParams();
-    const { curSongId, isPlaying } = useSelector((state) => state.music);
+    const { isPlaying } = useSelector((state) => state.music);
     const [playlist, setPlaylist] = useState({});
 
     const dispatch = useDispatch();
-
     useEffect(() => {
         const fetchApi = async () => {
+            dispatch(loading(true));
             const result = await musicService.getDetailPlaylist(id);
+            dispatch(loading(false));
+
             setPlaylist(result);
             dispatch(getSongs(result.song?.items));
         };
         fetchApi();
-    }, []);
+    }, [id]);
 
     return (
         <div className={cx('wrapper')}>
@@ -75,11 +78,12 @@ function PlaylistDetail() {
                         </div>
                         <div className={cx('mt-4')}>
                             <Button
-                                small
                                 primary
                                 curved
-                                className={cx('uppercase font-normal hover:brightness-90')}
-                                onClick={() => {}}
+                                className={cx('uppercase font-normal hover:brightness-90 py-2')}
+                                onClick={() => {
+                                    dispatch(play(!isPlaying));
+                                }}
                             >
                                 {!isPlaying ? 'Tiếp tục phát' : 'Tạm dừng'}
                             </Button>

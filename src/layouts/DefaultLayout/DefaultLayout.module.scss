@@ -6,7 +6,7 @@
     }
 
     .container {
-        @apply max-w-full overflow-y-auto mt-[70px] px-[59px];
+        @apply relative max-w-full overflow-y-auto mt-[70px] px-[59px];
     }
 
     .content {

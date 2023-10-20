@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { Fragment, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import { play, playAlbum, setCurSongId } from '~/redux/actions/musicAction';
@@ -33,8 +34,13 @@ function SonglistItem({ data = {} }) {
                     </div>
                     <div className={cx('info')}>
                         <h3 className={cx('text-sm text-white')}>{data.title}</h3>
-                        <div>
-                            <span>{data.artistsNames}</span>
+                        <div className={cx('subtitle')}>
+                            {data.artists?.map((artist, index) => (
+                                <Fragment key={artist.id}>
+                                    <Link to={artist.link}>{artist.name}</Link>
+                                    {data.artists?.length > index + 1 && ', '}
+                                </Fragment>
+                            ))}
                         </div>
                     </div>
                 </div>
