@@ -1,4 +1,4 @@
-import * as musicService from '~/services/musicService';
+// import * as musicService from '~/services/musicService';
 import { GET_SONGS, PLAY, SET_ALBUM, SET_CUR_SONG_ID } from '../constant';
 
 export const setCurSongId = (id) => ({

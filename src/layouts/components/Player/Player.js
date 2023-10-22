@@ -38,7 +38,6 @@ function Player() {
     const [isLoading, setIsLoading] = useState(false);
     const [volume, setVolume] = useState(100);
     const [audio, setAudio] = useState(new Audio());
-
     const dispatch = useDispatch();
 
     const thumRef = useRef();
@@ -165,17 +164,17 @@ function Player() {
                 <div className={cx('left')}>
                     <div className={cx('thumbnail')}>
                         <Image
-                            src={infoSong.thumbnailM}
-                            alt={infoSong.title}
+                            src={infoSong?.thumbnailM}
+                            alt={infoSong?.title}
                             className={cx('w-full h-auto object-cover')}
                         />
                     </div>
                     <div className={cx('info')}>
                         <h3 className={cx('title')}>
-                            <Link to={infoSong.link}>{infoSong.title}</Link>
+                            <Link to={infoSong?.link}>{infoSong?.title}</Link>
                         </h3>
                         <div className={cx('artists')}>
-                            <span>{infoSong.artistsNames}</span>
+                            <span>{infoSong?.artistsNames}</span>
                         </div>
                     </div>
                     <div className={cx('ml-[10px] flex items-center')}>
@@ -231,7 +230,7 @@ function Player() {
                             <div ref={thumRef} className={cx('absolute top-0 left-0 bottom-0 rounded bg-white')}></div>
                         </div>
                         <span className={cx('time-right', 'ml-[10px]')}>
-                            {moment.utc(infoSong.duration * 1000).format('mm:ss')}
+                            {moment.utc(infoSong?.duration * 1000).format('mm:ss')}
                         </span>
                     </div>
                 </div>

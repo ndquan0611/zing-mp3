@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import moment from 'moment';
 import classNames from 'classnames/bind';
 
 import * as musicService from '~/services/musicService';
-import { getSongs, play } from '~/redux/actions/musicAction';
+import { getSongs, play, setCurSongId } from '~/redux/actions/musicAction';
 import { loading } from '~/redux/actions/homeAction';
 import { handleTimer } from '~/convert/handleTimer';
 import { icons } from '~/components/Icons';
@@ -19,8 +19,9 @@ const cx = classNames.bind(styles);
 const { BsFillPlayFill } = icons;
 
 function PlaylistDetail() {
+    const location = useLocation();
     const { id } = useParams();
-    const { isPlaying } = useSelector((state) => state.music);
+    const { isPlaying, songs } = useSelector((state) => state.music);
     const [playlist, setPlaylist] = useState({});
 
     const dispatch = useDispatch();
@@ -35,6 +36,13 @@ function PlaylistDetail() {
         };
         fetchApi();
     }, [id]);
+
+    useEffect(() => {
+        if (location.state?.playAlbum) {
+            dispatch(setCurSongId(songs[0]?.encodeId));
+            dispatch(play(true));
+        }
+    }, [id, songs]);
 
     return (
         <div className={cx('wrapper')}>

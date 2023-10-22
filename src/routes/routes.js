@@ -8,6 +8,7 @@ import Hub from '~/pages/Hub';
 import Top100 from '~/pages/Top100';
 import Playlist from '~/pages/Playlist';
 import Album from '~/pages/Album';
+import WeekChart from '~/pages/WeekChart';
 
 const publicRoutes = [
     {
@@ -45,6 +46,10 @@ const publicRoutes = [
     {
         path: config.routes.album,
         component: Album,
+    },
+    {
+        path: config.routes.weekChart,
+        component: WeekChart,
     },
 ];
 

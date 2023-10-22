@@ -1,4 +1,4 @@
-import { GET_HOME, LOADING, SHOW } from '../constant';
+import { GET_HOME, HOVER, LOADING, SHOW } from '../constant';
 
 const initState = {
     banner: [],
@@ -10,7 +10,9 @@ const initState = {
     top100: {},
     album: {},
     newRelease: {},
+    weekChart: [],
     isShow: false,
+    isHover: false,
     isLoading: false,
 };
 
@@ -28,11 +30,17 @@ const appReducer = (state = initState, action) => {
                 top100: action.payload.items.find((item) => item.sectionId === 'h100') || {},
                 album: action.payload.items.find((item) => item.sectionId === 'hAlbum') || {},
                 newRelease: action.payload.items.find((item) => item.sectionType === 'new-release') || {},
+                weekChart: action.payload.items.find((item) => item.sectionType === 'weekChart').items || [],
             };
         case SHOW:
             return {
                 ...state,
                 isShow: action.payload,
+            };
+        case HOVER:
+            return {
+                ...state,
+                isHover: action.payload,
             };
         case LOADING:
             return {

@@ -1,0 +1,26 @@
+@tailwind components;
+
+@layer components {
+    .wrapper {
+        @apply mt-7;
+    }
+
+    .inner {
+        @apply flex items-center -mx-[15px];
+    }
+
+    .weekchart-item {
+        @apply w-1/3 px-[14px];
+
+        a {
+            @apply overflow-hidden block rounded;
+
+            &:hover {
+                img {
+                    @apply scale-105 brightness-90;
+                    transition: all 0.3s linear;
+                }
+            }
+        }
+    }
+}

@@ -20,7 +20,7 @@ export const getInfoSong = async (id) => {
                 id: id,
             },
         });
-        return res.data;
+        return res?.data;
     } catch (error) {
         console.log(error);
     }

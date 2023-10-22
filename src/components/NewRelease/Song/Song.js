@@ -28,7 +28,7 @@ function Song({ data = [] }) {
 }
 
 Song.propTypes = {
-    data: PropTypes.array.isRequired,
+    data: PropTypes.array,
 };
 
 export default Song;
