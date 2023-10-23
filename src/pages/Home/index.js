@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import Chart from '~/components/Chart';
 import Gallery from '~/components/Gallery';
 import NewRelease from '~/components/NewRelease';
 import Playlist from '~/components/Playlist';
@@ -16,6 +17,7 @@ function Home() {
             <Playlist data={remix} />
             <Playlist data={status} />
             <Playlist data={popular} />
+            <Chart />
             <WeekChart />
             <Playlist data={top100} />
             <Playlist data={album} />

@@ -1,16 +1,16 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 import classNames from 'classnames/bind';
 
 import { HeartIcon, MoreIcon, icons } from '~/components/Icons';
 import { play, setCurSongId } from '~/redux/actions/musicAction';
 import { show } from '~/redux/actions/homeAction';
+import { SongLoading } from '~/components/Loading';
 import * as musicService from '~/services/musicService';
 import Image from '~/components/Image';
 import styles from './Player.module.scss';
-import moment from 'moment';
-import { SongLoading } from '~/components/Loading';
 
 const {
     BiShuffle,

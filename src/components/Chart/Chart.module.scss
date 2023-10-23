@@ -1,0 +1,31 @@
+@tailwind components;
+
+@layer components {
+    .wrapper {
+        @apply relative mt-12 p-5 overflow-hidden rounded-lg;
+    }
+
+    .blur {
+        @apply absolute top-0 left-0 right-0 bottom-0 bg-[#2b273f];
+    }
+
+    .alpha {
+        @apply absolute top-0 left-0 right-0 bottom-0 bg-[#33104cf2];
+    }
+
+    .title {
+        @apply relative text-[28px] font-bold mb-5;
+
+        a {
+            background: radial-gradient(50% 124.93% at 95.86% -10%, #3efad9 0, hsla(0, 0%, 100%, 0) 100%),
+                linear-gradient(91.56deg, #ff9357 1.54%, #9100ff 98.71%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    .content {
+        @apply relative flex -mx-[15px];
+    }
+}

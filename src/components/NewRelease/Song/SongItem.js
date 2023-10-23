@@ -10,19 +10,20 @@ import styles from './Song.module.scss';
 
 const cx = classNames.bind(styles);
 
-function SongItem({ data = {} }) {
+function SongItem({ data = {}, isDate, order, percent, isRank }) {
     const [isActive, setIsActive] = useState(false);
     const dispatch = useDispatch();
 
     return (
         <div
-            className={cx('song-item', `${isActive && 'bg-borderPrimary'}`)}
+            className={cx('song-item', `${isActive && 'bg-borderPrimary'}`, `${isRank && 'bg-[#ffffff12] mb-[10px]'}`)}
             onDoubleClick={() => {
                 setIsActive((prev) => !prev);
                 dispatch(setCurSongId(data.encodeId));
                 dispatch(play(true));
             }}
         >
+            {!!order && <div className={cx('prefix')}>{order}</div>}
             <div className={cx('thumbnail')}>
                 <Image src={data.thumbnailM} alt={data.title} />
             </div>
@@ -36,8 +37,9 @@ function SongItem({ data = {} }) {
                         </Fragment>
                     ))}
                 </h4>
-                <div className={cx('time-release')}>{moment(data.releaseDate * 1000).fromNow()}</div>
+                {isDate && <div className={cx('time-release')}>{moment(data.releaseDate * 1000).fromNow()}</div>}
             </div>
+            {!!percent && <div className={cx('percent')}>{percent}%</div>}
         </div>
     );
 }

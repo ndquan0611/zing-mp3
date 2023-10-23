@@ -10,11 +10,37 @@
     }
 
     .song-item {
-        @apply p-[10px] flex rounded-[5px] hover:bg-borderPrimary;
+        @apply py-[10px] px-[15px] flex items-center justify-between rounded-[5px] hover:bg-borderPrimary;
+
+        &:first-child {
+            .prefix {
+                -webkit-text-stroke: 1px #4a90e2;
+            }
+        }
+
+        &:nth-child(2) {
+            .prefix {
+                -webkit-text-stroke: 1px #50e3c2;
+            }
+        }
+
+        &:nth-child(3) {
+            .prefix {
+                -webkit-text-stroke: 1px #e35050;
+            }
+        }
+    }
+
+    .prefix {
+        @apply mr-[15px] flex items-center justify-center text-[32px] font-bold font-roboto text-transparent;
     }
 
     .thumbnail {
         @apply w-[60px] h-[60px] mr-[10px] rounded overflow-hidden;
+    }
+
+    .info {
+        @apply flex-1;
     }
 
     .title {
@@ -31,5 +57,9 @@
 
     .time-release {
         @apply text-[12px] font-normal text-textSecondary;
+    }
+
+    .percent {
+        @apply font-bold flex items-center justify-center;
     }
 }
